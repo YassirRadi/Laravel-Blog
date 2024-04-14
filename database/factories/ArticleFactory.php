@@ -15,10 +15,9 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->realText(30),
-            'content' => "<p>" . fake()->paragraph(rand(3, 20), true) . "</p>",
+            'title' => fake()->realText(20),
+            'content' => "<p>" . fake()->paragraph(rand(3, 25), true) . "</p>",
             'image_url' => fake()->imageUrl(304, 218),
-            'status' => "draft",
             'user_id' => User::factory(),
         ];
     }

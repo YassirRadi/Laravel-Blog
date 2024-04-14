@@ -38,12 +38,12 @@
               <div class="collapse navbar-collapse" id="navbarContent">
                 <ul id="menu" class="menu navbar-nav mx-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                   </li>
 
                   @auth
                   <li class="nav-item">
-                    <a href="fashion.html" class="nav-link">Dashboard</a>
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
                   </li>
                   
                   <li class="nav-item">
@@ -105,7 +105,6 @@
 
     @yield('content')
 
-    <!-- Footer Start -->
     <section class="footer-2 section-padding gray-bg pb-5">
       <div class="container">
         <div class="footer-btm mt-5 pt-4 border-top">
@@ -139,8 +138,6 @@
     <script src="plugins/slick-carousel/slick.min.js"></script>
     <script src="plugins/magnific-popup/magnific-popup.js"></script>
     <script src="plugins/instafeed-js/instafeed.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
-    <script src="plugins/google-map/gmap.js"></script>
     <script src="js/custom.js"></script>
   </body>
 </html>

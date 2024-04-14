@@ -62,7 +62,7 @@
         @endforeach
 
             <div class="m-auto">
-                {{ $articles->links('vendor.pagination.custom') }}
+                {{ $articles->links('layouts.custom') }}
             </div>
         </div>
 

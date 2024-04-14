@@ -21,7 +21,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -29,13 +29,16 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validating the input
+        $articleFields = $request->validate([]);
+
+        // storing in the database 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
         //
     }
