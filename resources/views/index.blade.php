@@ -19,7 +19,7 @@
           <div class="mb-4 post-list border-bottom pb-4">
             <div class="row no-gutters">
               <div class="col-md-5">
-                <a class="post-thumb" href="blog-single.html">
+                <a class="post-thumb" href="{{ route('details', ['id' => $item->id]) }}">
                   <img src="images/fashion/img-1.jpg" alt="photo" class="img-fluid w-100"/>
                 </a>
               </div>
@@ -33,7 +33,7 @@
                     </span>
                   </div>
                   <h3 class="post-title mt-2">
-                    <a href="blog-single.html">{{ $item->title }}</a>
+                    <a href="{{ route('details', ['id' => $item->id]) }}">{{ $item->title }}</a>
                   </h3>
 
                   <div class="post-meta">

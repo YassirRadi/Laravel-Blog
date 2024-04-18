@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form action="/admin/articles" method="POST" enctype="multipart/form-data">
+                <form action="{{route('createArticle')}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-outline mb-4">
@@ -27,17 +27,21 @@
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="content">Article Content</label>
-                        <textarea class="form-control" name="content" rows="20">{{ old('contenu') }}</textarea>
+                        <textarea class="form-control" name="content" rows="20">{{ old('content') }}</textarea>
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="image">Article Image</label><br>
-                        <input type="file" name="image" class="form-control" />
+                        <input type="file" name="image_url" class="form-control" value="{{ old('image_url') }}"" />
                     </div>
 
                     <div class="form-outline mb-4">
                         <label class="form-label" for="category">Category</label>
-                        <input type="text" name="category" class="form-control" value="{{ old('category') }}" />
+                        <select name="category" id="">
+                            @foreach ($categories as $category)
+                              <option id="{{ $category->id }}" value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="form-outline mb-4">
@@ -45,7 +49,7 @@
                         <input type="text" name="tags" class="form-control" value="{{ old('tags') }}" />
                     </div>
 
-                    <input type="hidden" name="user" value="{{ auth()->user()->id }}">
+                    {{-- <input type="hidden" name="user" value="{{ auth()->user()->id }}"> --}}
 
                     <button type="submit" class="btn btn-primary btn-block mb-4">Publish</button>
                 </form>

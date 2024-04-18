@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -21,7 +25,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $categories = Category::all();
+        return view('create', ['categories' => $categories]);
     }
 
     /**
@@ -29,18 +34,49 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        // validating the input
-        $articleFields = $request->validate([]);
+        // validating the incoming data
+        $validatedData = $request->validate([
+            'title' => ['required'],
+            'content' => ['required'],
+            'image_url' => ['required'],
+            'category' => ['required'],
+            'tags' => ['required'],
+        ]);
 
-        // storing in the database 
+        // uploading the image to public/pictures
+        $validatedData['image_url'] = $request->file('image_url')->store('pictures', 'public');
+
+        // get the authenticated user ID
+        $validatedData['user_id'] = Auth::id();
+
+        // storing the record in the database
+        $article = Article::create($validatedData);
+
+        // ....
+        $article->categories()->attach($validatedData['category']);
+
+        $tagIds = [];
+        $tags = collect(explode(',', $validatedData['tags']))->map(function ($tag) {
+            return trim($tag);
+        });
+
+        foreach ($tags as $tagName) {
+            $tag = Tag::firstOrCreate(['name' => $tagName]);
+            $tagIds[] = $tag->id;
+        }
+
+        $article->tags()->attach($tagIds);
+
+        return redirect()->route("home")->with(['success' => 'Article published successfully']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+
+    public function show(Article $id)
     {
-        //
+        return view('details', ['article' => $id]);
     }
 
     /**
